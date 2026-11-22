@@ -2,20 +2,183 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Surpresa de Aniversário!</title>
+  <!-- Linha essencial para ficar do tamanho exato do ecrã do telemóvel -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚠️ Aviso do Sistema</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: #1e272e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      transition: background-color 0.5s;
+    }
+
+    /* Caixa estilo pop-up adaptada ao telemóvel */
+    .janela {
+      background: white;
+      width: 100%;
+      max-width: 380px;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      text-align: center;
+      animation: aparecer 0.25s ease;
+    }
+
+    @keyframes aparecer {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #2f3542;
+      font-size: 22px;
+    }
+
+    p {
+      color: #57606f;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px; /* Evita zoom automático no iPhone */
+      border: 2px solid #dfe4ea;
+      border-radius: 10px;
+      margin: 15px 0;
+      text-align: center;
+    }
+
+    .botoes {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .btn-sim {
+      background-color: #2ed573;
+      color: white;
+    }
+
+    .btn-nao {
+      background-color: #ff4757;
+      color: white;
+    }
+
+    .btn-azul {
+      background-color: #1e90ff;
+      color: white;
+    }
+  </style>
 </head>
 <body>
 
+  <!-- O conteúdo muda dinamicamente aqui dentro -->
+  <div class="janela" id="caixa"></div>
+
   <script>
-    let nome = prompt("Ana");
+    const caixa = document.getElementById("caixa");
+    let nome = "";
+    let idade = "";
 
-    let bolo = confirm("Olha " + nome + "! Vais-me dar bolo correto?");
-
-    if (bolo === true) {
-      alert("Acho bem, " + nome + "! Feliz Aniversario");
-    } else {
-      alert("Vou chorar 🥲🥲, " + nome + "! Mas mesmo assim desejo-te um Feliz Aniversario");
+    // Passo 1: Pedir o nome
+    function passo1() {
+      caixa.innerHTML = `
+        <h2>🚨 ALERTA DE SEGURANÇA</h2>
+        <p>Identifica-te para continuar. Qual é o teu nome?</p>
+        <input type="text" id="inputNome" placeholder="Escreve o teu nome...">
+        <div class="botoes">
+          <button class="btn-azul" onclick="guardarNome()">Continuar</button>
+        </div>
+      `;
     }
+
+    function guardarNome() {
+      let valor = document.getElementById("inputNome").value.trim();
+      nome = valor === "" ? "Aniversariante Misterioso" : valor;
+      passo2();
+    }
+
+    // Passo 2: Pedir a idade
+    function passo2() {
+      caixa.innerHTML = `
+        <h2>Olá, ${nome}! 👋</h2>
+        <p>Quantos anos fazes hoje?</p>
+        <input type="number" id="inputIdade" placeholder="Ex: 20">
+        <div class="botoes">
+          <button class="btn-azul" onclick="guardarIdade()">Verificar Idade</button>
+        </div>
+      `;
+    }
+
+    function guardarIdade() {
+      idade = document.getElementById("inputIdade").value;
+      if (idade === "") idade = "??";
+
+      let piada = Number(idade) >= 18
+        ? `Ui, ${idade} anos?! 💀<br>O sistema detetou excesso de velhice e dores nas costas!`
+        : `${idade} anos?! 🍼<br>Ainda tens muito que crescer, mas já mereces festa!`;
+
+      caixa.innerHTML = `
+        <h2>📊 Resultado da Análise</h2>
+        <p>${piada}</p>
+        <div class="botoes">
+          <button class="btn-azul" onclick="passo3(false)">Avançar</button>
+        </div>
+      `;
+    }
+
+    // Passo 3: O Loop Teimoso do Bolo (com botões grandes para o dedo!)
+    function passo3(tentouRecusar) {
+      let titulo = tentouRecusar ? "❌ ERRO 404: Forreta Detetado!" : "🍰 Pergunta Séria";
+      let texto = tentouRecusar
+        ? `O sistema não aceita "Não" hoje, <strong>${nome}</strong>! Vou perguntar outra vez:<br><br><strong>Vais-me dar uma fatia de bolo?</strong>`
+        : `Olha <strong>${nome}</strong>, vais-me dar uma fatia de bolo hoje, correto?`;
+
+      caixa.innerHTML = `
+        <h2>${titulo}</h2>
+        <p>${texto}</p>
+        <div class="botoes">
+          <button class="btn-nao" onclick="passo3(true)">Não 😒</button>
+          <button class="btn-sim" onclick="passoFinal()">Sim! 🍰</button>
+        </div>
+      `;
+    }
+
+    // Passo 4: Cartão Final de Parabéns
+    function passoFinal() {
+      document.body.style.backgroundColor = "#ffe066";
+      caixa.innerHTML = `
+        <h2 style="font-size: 30px; color: #ff4757;">🎉 PARABÉNS, ${nome.toUpperCase()}! 🎂</h2>
+        <p style="font-size: 18px;">Acho muito bem! Muitas felicidades nos teus <strong>${idade} anos</strong>!</p>
+        <p style="font-size: 16px; color: #2f3542; margin-top: 15px;">Fico oficialmente à espera da minha fatia de bolo! 😋🍰</p>
+      `;
+    }
+
+    // Inicia a brincadeira assim que abre
+    passo1();
   </script>
 
 </body>
