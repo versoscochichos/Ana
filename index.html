@@ -3,110 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Missão Aniversário</title>
+  <title>Para ti</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 20px;
+      /* Fundo cor de papel creme com textura subtil */
+      background-color: #f4efe6;
+      color: #1c1917;
+      font-family: Georgia, "Times New Roman", serif;
+      padding: 24px;
     }
+
     main {
       width: 100%;
-      max-width: 400px;
-      background: #1e293b;
-      padding: 28px;
-      border-radius: 16px;
-      border: 1px solid #334155;
+      max-width: 420px;
+      background-color: #fffdf9;
+      border: 2px solid #1c1917;
+      /* Sombra sólida estilo postal/impresso, sem o blur artificial típico de templates */
+      box-shadow: 6px 6px 0px #1c1917;
+      padding: 32px 28px;
     }
-    /* Só a secção com a classe "ativa" aparece */
-    section { display: none; flex-direction: column; gap: 16px; }
-    section.ativa { display: flex; }
+
+    .etiqueta {
+      display: inline-block;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid #1c1917;
+      padding: 3px 8px;
+      margin-bottom: 18px;
+      background-color: #fde047;
+    }
+
+    section {
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    section.ativa {
+      display: flex;
+    }
+
+    h1, h2 {
+      font-size: 26px;
+      line-height: 1.2;
+      font-weight: normal;
+    }
+
+    p {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #44403c;
+    }
 
     input {
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #475569;
-      background: #0f172a;
-      color: white;
+      width: 100%;
+      padding: 12px 14px;
       font-size: 16px;
+      font-family: "Courier New", Courier, monospace;
+      border: 2px solid #1c1917;
+      background: #f4efe6;
+      color: #1c1917;
+      outline: none;
     }
-    .grupo-botoes { display: flex; gap: 10px; }
+
+    input:focus {
+      background: #ffffff;
+    }
+
+    .acoes {
+      display: flex;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
     button {
       flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
+      padding: 12px 16px;
+      font-family: "Courier New", Courier, monospace;
       font-size: 15px;
+      font-weight: bold;
+      border: 2px solid #1c1917;
+      background-color: #1c1917;
+      color: #fffdf9;
       cursor: pointer;
+      transition: transform 0.1s;
     }
-    .primario { background: #3b82f6; color: white; }
-    .sucesso { background: #10b981; color: white; }
-    .perigo { background: #ef4444; color: white; }
+
+    button:active {
+      transform: translate(2px, 2px);
+    }
+
+    button.secundario {
+      background-color: transparent;
+      color: #1c1917;
+    }
+
+    .nota-rodape {
+      margin-top: 12px;
+      padding-top: 14px;
+      border-top: 1px dashed #a8a29e;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 13px;
+      color: #78716c;
+    }
   </style>
 </head>
 <body>
 
   <main>
-    <!-- Etapa 1: Nome -->
-    <section id="etapa-nome" class="ativa">
-      <h2>Identificação</h2>
-      <p>Escreve o teu nome para desbloquear a página:</p>
-      <input type="text" id="campo-nome" placeholder="O teu nome">
-      <button id="btn-nome" class="primario">Continuar</button>
-    </section>
+    <span class="etiqueta" id="carimbo">Nota nº 01</span>
 
-    <!-- Etapa 2: Bolo -->
-    <section id="etapa-bolo">
-      <h2 id="titulo-bolo">Pergunta importante</h2>
-      <p id="texto-bolo">Vais partilhar o bolo hoje?</p>
-      <div class="grupo-botoes">
-        <button id="btn-nao" class="perigo">Não</button>
-        <button id="btn-sim" class="sucesso">Sim</button>
+    <!-- Etapa 1 -->
+    <section id="etapa-nome" class="ativa">
+      <h1>Antes de mais nada...</h1>
+      <p>Escreve aí o teu nome só para ter a certeza de que mandei o link à pessoa certa.</p>
+      <input type="text" id="campo-nome" placeholder="O teu nome" autocomplete="off">
+      <div class="acoes">
+        <button id="btn-nome">Avançar -&gt;</button>
       </div>
     </section>
 
-    <!-- Etapa 3: Parabéns -->
+    <!-- Etapa 2 -->
+    <section id="etapa-bolo">
+      <h2 id="titulo-bolo">Acordo prévio</h2>
+      <p id="texto-bolo">Vais guardar uma fatia de bolo para mim hoje, certo?</p>
+      <div class="acoes">
+        <button id="btn-nao" class="secundario">Nem pensar</button>
+        <button id="btn-sim">Claro que sim</button>
+      </div>
+    </section>
+
+    <!-- Etapa 3 -->
     <section id="etapa-final">
-      <h2 id="titulo-final">Parabéns!</h2>
-      <p>Muitas felicidades no teu dia! Fico à espera da minha fatia.</p>
+      <h1 id="titulo-final">Parabéns!</h1>
+      <p id="texto-final">Fica registado. Muitos parabéns pelo teu dia — aproveita bem e não te esqueças do combinado.</p>
+      <div class="nota-rodape" id="data-registo"></div>
     </section>
   </main>
 
   <script>
-    // Seleção limpa dos elementos
+    const carimbo = document.getElementById("carimbo");
     const etapaNome = document.getElementById("etapa-nome");
     const etapaBolo = document.getElementById("etapa-bolo");
     const etapaFinal = document.getElementById("etapa-final");
 
-    let nome = "";
+    const frasesRecusa = [
+      "Esse botão está avariado hoje. Tenta o outro.",
+      "Boa tentativa, mas não aceito um não como resposta.",
+      "Olha que dá azar no dia de anos ser forreta. Carrega no preto.",
+      "Vá lá, não custa nada. Prometo que não peço a maior fatia."
+    ];
 
-    // Passo 1 -> Passo 2
+    let nome = "";
+    let tentativas = 0;
+
     document.getElementById("btn-nome").addEventListener("click", () => {
-      nome = document.getElementById("campo-nome").value.trim() || "Aniversariante";
-      document.getElementById("texto-bolo").textContent = `Olha ${nome}, vais-me dar bolo correto?`;
+      const valor = document.getElementById("campo-nome").value.trim();
+      if (valor === "") {
+        document.getElementById("campo-nome").placeholder = "Escreve mesmo o nome primeiro...";
+        return;
+      }
+      nome = valor;
+      carimbo.textContent = "Cláusula do bolo";
+      document.getElementById("texto-bolo").textContent = `Olha ${nome}, antes de abrir o resto: vais guardar uma fatia de bolo para mim, certo?`;
       etapaNome.classList.remove("ativa");
       etapaBolo.classList.add("ativa");
     });
 
-    // Botão "Não" insiste sem reescrever o HTML
     document.getElementById("btn-nao").addEventListener("click", () => {
-      document.getElementById("titulo-bolo").textContent = "Resposta inválida!";
-      document.getElementById("texto-bolo").textContent = `Não aceito um não, ${nome}. Tenta outra vez!`;
+      const frase = frasesRecusa[tentativas % frasesRecusa.length];
+      document.getElementById("texto-bolo").textContent = frase;
+      tentativas++;
     });
 
-    // Passo 2 -> Passo 3
     document.getElementById("btn-sim").addEventListener("click", () => {
-      document.getElementById("titulo-final").textContent = `Feliz Aniversário, ${nome}! 🎂`;
+      carimbo.textContent = "Confirmado";
+      carimbo.style.backgroundColor = "#bbf7d0";
+      document.getElementById("titulo-final").textContent = `Muitos parabéns, ${nome}.`;
+      document.getElementById("data-registo").textContent = "Compromisso assinado em " + new Date().toLocaleDateString("pt-PT");
       etapaBolo.classList.remove("ativa");
       etapaFinal.classList.add("ativa");
     });
   </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
