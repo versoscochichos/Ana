@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>⚠️ Aviso do Sistema</title>
+</head>
+<body>
+
+  <script>
+    // 1. Pede o nome e garante que não fica vazio
+    let nome = prompt("🚨 ALERTA DE SEGURANÇA!\nIdentifica-te. Qual é o teu nome?");
+    if (!nome || nome.trim() === "") {
+      nome = "Aniversariante Misterioso";
+    }
+
+    // 2. Pergunta a idade e manda uma boca sobre velhice
+    let idade = prompt("Olá " + nome + "! Quantos anos fazes hoje?");
+    if (Number(idade) >= 18) {
+      alert("Ui, " + idade + " anos?! 💀\nO sistema detetou excesso de velhice e dores nas costas!");
+    } else {
+      alert(idade + " anos?! 🍼\nAinda tens muito que crescer, mas já mereces festa!");
+    }
+
+    // 3. Loop teimoso do bolo (não deixa clicar em Cancelar!)
+    let bolo = confirm("Pergunta séria, " + nome + ":\nVais-me dar uma fatia de bolo, correto? 🍰");
+
+    while (bolo === false) {
+      alert("❌ ERRO 404: Resposta inválida!\nO sistema não aceita forretas hoje. Tenta outra vez!");
+      bolo = confirm("Vou perguntar com calma, " + nome + "...\nVAIS-ME DAR BOLO SIM OU SIM? 🔪🍰");
+    }
+
+    // 4. Mensagem final depois de aceitar o bolo
+    alert("Acho muito bem, " + nome + "! Assim já podemos continuar! 🎉");
+
+    // 5. Transforma o ecrã branco numa página de Parabéns
+    document.body.style.backgroundColor = "#ffe066";
+    document.body.style.textAlign = "center";
+    document.body.style.fontFamily = "Arial, sans-serif";
+    document.body.style.padding = "20px";
+    document.body.innerHTML = `
+      <div style="margin-top: 15vh; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 500px; margin-left: auto; margin-right: auto;">
+        <h1 style="font-size: 42px; color: #ff4757; margin-bottom: 10px;">🎉 PARABÉNS, ${nome.toUpperCase()}! 🎂</h1>
+        <p style="font-size: 20px; color: #333;">Muitas felicidades nos teus <strong>${idade} anos</strong>!</p>
+        <p style="font-size: 18px; color: #666; margin-top: 20px;">Fico à espera da minha fatia de bolo! 🍰😋</p>
+      </div>
+    `;
+  </script>
+
+</body>
+</html>
